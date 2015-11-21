@@ -1532,11 +1532,11 @@ class ApplicationController < ActionController::Base
   end # set_config
 
   # Common routine to find checked items on a page (checkbox ids are "check_xxx" where xxx is the item id or index)
-  def find_checked_items(prefix = nil)
+  def find_checked_items
     unless params[:miq_grid_checks].blank?
       return params[:miq_grid_checks].split(",").collect { |c| from_cid(c) }
     else
-      prefix = "check" if prefix.nil?
+      prefix = "check"
       items = []
       params.each do |var, val|
         vars = var.to_s.split("_")
