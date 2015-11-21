@@ -1536,11 +1536,10 @@ class ApplicationController < ActionController::Base
     unless params[:miq_grid_checks].blank?
       return params[:miq_grid_checks].split(",").collect { |c| from_cid(c) }
     else
-      prefix = "check"
       items = []
       params.each do |var, val|
         vars = var.to_s.split("_")
-        if vars[0] == prefix && val == "1"
+        if vars[0] == "check" && val == "1"
           ids = vars[1..-1].collect { |v| v = from_cid(v) }  # Decompress any compressed ids
           items.push(ids.join("_"))
         end
