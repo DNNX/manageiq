@@ -1539,8 +1539,7 @@ class ApplicationController < ActionController::Base
       params.map do |var, val|
         prefix, *cids = var.to_s.split("_")
         if prefix == "check" && val == "1"
-          ids = cids.collect { |v| v = from_cid(v) }  # Decompress any compressed ids
-          ids.join("_")
+          cids.map { |v| from_cid(v) }.join("_")  # Decompress any compressed ids
         end
       end.compact
     end
