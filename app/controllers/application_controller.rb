@@ -1537,9 +1537,9 @@ class ApplicationController < ActionController::Base
       params[:miq_grid_checks].split(",").collect { |c| from_cid(c) }
     else
       params.map do |var, val|
-        prefix, *cids = var.to_s.split("_")
+        prefix, cid = var.to_s.split("_")
         if prefix == "check" && val == "1"
-          cids.map { |v| from_cid(v) }.join("_")  # Decompress any compressed ids
+          from_cid(cid)  # Decompress any compressed ids
         end
       end.compact
     end
